@@ -3,12 +3,10 @@ import {useLocation} from "react-router-dom";
 
 const Room = () => {
     const location = useLocation();
-    const userVideo = useRef();
+    const userVideo = useRef<HTMLVideoElement | undefined>();
     const partnerVideo = useRef<HTMLVideoElement | undefined>();
     const peerRef = useRef<RTCPeerConnection | undefined>();
     const webSocketRef = useRef<WebSocket | undefined>();
-    
-
     const userStream = useRef<MediaStream | undefined>();
     
     const openCamera = async () => {
@@ -17,7 +15,7 @@ const Room = () => {
         audio: true,
       };
       navigator.mediaDevices.getUserMedia(constraints).then((stream) =>{
-        (userVideo.current as HTMLVideoElement).srcObject = stream
+        userVideo.current.srcObject = stream
         userStream.current = stream
       })
     };
